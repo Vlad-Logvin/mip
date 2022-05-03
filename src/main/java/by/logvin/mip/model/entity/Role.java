@@ -3,7 +3,6 @@ package by.logvin.mip.model.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -13,7 +12,7 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "role", unique = true)
     private String role;
@@ -24,5 +23,5 @@ public class Role {
             joinColumns = {@JoinColumn(name = "role_id")},
             inverseJoinColumns = {@JoinColumn(name = "authority_id")}
     )
-    private Set<Authority> authorities = new HashSet<>();
+    private Set<Authority> authorities;
 }

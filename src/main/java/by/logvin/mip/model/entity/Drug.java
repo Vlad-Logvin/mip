@@ -11,7 +11,7 @@ public class Drug {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -23,7 +23,7 @@ public class Drug {
     private String price;
 
     @Column(name = "quantity")
-    private String quantity;
+    private Integer quantity;
 
     @Column(name = "is_deleted")
     private boolean isDeleted;

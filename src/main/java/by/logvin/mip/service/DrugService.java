@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface DrugService {
-    Drug findById(long id);
+    Drug findById(Long id);
 
     Page<Drug> findPaginated(Pageable pageable);
 
@@ -15,7 +15,7 @@ public interface DrugService {
 
     Drug save(Drug drug);
 
-    Drug delete(long id);
+    Drug delete(Long id);
 
-    Drug update(long id, Drug drug);
+    Drug update(Long id, Drug drug);
 }

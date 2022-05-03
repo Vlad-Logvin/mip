@@ -19,7 +19,7 @@ public class DrugServiceImpl implements DrugService {
     private DrugRepository drugRepository;
 
     @Override
-    public Drug findById(long id) {
+    public Drug findById(Long id) {
         return drugRepository.findById(id)
                 .orElseThrow(() -> new AutomatedDrugServiceException("Drug was not found", 400));
     }
@@ -44,7 +44,7 @@ public class DrugServiceImpl implements DrugService {
     }
 
     @Override
-    public Drug delete(long id) {
+    public Drug delete(Long id) {
         Drug drugToDelete = findById(id);
         drugToDelete.setDeleted(true);
         drugToDelete = drugRepository.save(drugToDelete);
@@ -52,7 +52,7 @@ public class DrugServiceImpl implements DrugService {
     }
 
     @Override
-    public Drug update(long id, Drug drug) {
+    public Drug update(Long id, Drug drug) {
         Drug drugToUpdate = findById(id);
         drugToUpdate.setName(drug.getName());
         drugToUpdate.setPrice(drug.getPrice());

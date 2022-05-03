@@ -9,11 +9,15 @@ public class Storage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "address")
     private String address;
 
-    @OneToMany
+    @OneToMany(mappedBy = "storage")
     private List<Drug> drugs;
+
+    @ManyToOne
+    @JoinColumn(name = "pharmacy_id", nullable = false)
+    private Pharmacy pharmacy;
 }

@@ -3,7 +3,6 @@ package by.logvin.mip.model.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Data
 @Entity
@@ -12,14 +11,16 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
-    @Column(name = "solder_id")
-    private Employee solder;
+    @ManyToOne
+    @JoinColumn(name = "drug_id", nullable = false)
+    private Drug drug;
 
-    @Column(name = "date_of_purchase")
-    private LocalDate dateOfPurchase;
+    @ManyToOne
+    @JoinColumn(name = "receipt_id", nullable = false)
+    private Receipt receipt;
 
-    @Column(name = "grand_total")
-    private Double grandTotal;
+    @Column(name = "quantity")
+    private Integer quantity;
 }
