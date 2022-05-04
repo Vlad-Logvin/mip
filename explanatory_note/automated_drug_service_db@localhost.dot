@@ -1,0 +1,36 @@
+digraph "automated_drug_service_db@localhost" {
+
+splines  = ortho;
+fontname = "Inconsolata";
+
+node [colorscheme = ylgnbu4];
+edge [colorscheme = dark28, dir = both];
+
+authorities           [shape = record, pos = "11.386,9.390!"    , label = "{ authorities |  authority : varchar(255)\l| id : bigint\l }"];
+drugs                 [shape = record, pos = "0.259,7.436!"     , label = "{ drugs |  description : varchar(1024)\l  image : varchar(255)\l  is_deleted : boolean\l  name : varchar(255)\l  price : numeric(18,2)\l  quantity : integer\l  storage_id : bigint\l  vendor_id : bigint\l| id : bigint\l }"];
+m2m_reports_receipts  [shape = record, pos = "6.993,4.153!"     , label = "{ m2m_reports_receipts |  report_id : bigint\l  receipt_id : bigint\l }"];
+m2m_roles_authorities [shape = record, pos = "10.075,6.784!"    , label = "{ m2m_roles_authorities |  role_id : bigint\l  authority_id : bigint\l }"];
+m2m_users_roles       [shape = record, pos = "6.975,6.975!"     , label = "{ m2m_users_roles |  user_id : bigint\l  role_id : bigint\l }"];
+orders                [shape = record, pos = "1.903,3.599!"     , label = "{ orders |  is_deleted : boolean\l  quantity : integer\l  drug_id : bigint\l  receipt_id : bigint\l| id : bigint\l }"];
+pharmacies            [shape = record, pos = "0.063,12.269!"    , label = "{ pharmacies |  is_deleted : boolean\l  name : varchar(255)\l| id : bigint\l }"];
+receipts              [shape = record, pos = "3.626,7.021!"     , label = "{ receipts |  date_of_purchase : date\l  grand_total : numeric(18,2)\l  is_deleted : boolean\l  solder_id : bigint\l| id : bigint\l }"];
+reports               [shape = record, pos = "13.502,6.927!"    , label = "{ reports |  end_date : date\l  is_deleted : boolean\l  name : varchar(255)\l  start_date : date\l| id : bigint\l }"];
+roles                 [shape = record, pos = "8.822,9.581!"     , label = "{ roles |  role : varchar(255)\l| id : bigint\l }"];
+storages              [shape = record, pos = "-1.442,10.049!"   , label = "{ storages |  is_deleted : boolean\l  pharmacy_address : varchar(512)\l  pharmacy_id : bigint\l| id : bigint\l }"];
+users                 [shape = record, pos = "5.089,10.499!"    , label = "{ users |  address : varchar(512)\l  email : varchar(255)\l  is_deleted : boolean\l  name : varchar(64)\l  encrypted_password : varchar(64)\l  surname : varchar(64)\l| id : bigint\l }"];
+vendors               [shape = record, pos = "2.238,9.952!"     , label = "{ vendors |  address : varchar(255)\l  is_deleted : boolean\l  name : varchar(255)\l| id : bigint\l }"];
+
+drugs                 -> storages              [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "storage_id:id", headlabel = ""];
+drugs                 -> vendors               [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "vendor_id:id", headlabel = ""];
+m2m_reports_receipts  -> receipts              [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "receipt_id:id", headlabel = ""];
+m2m_reports_receipts  -> reports               [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "report_id:id", headlabel = ""];
+m2m_roles_authorities -> authorities           [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "authority_id:id", headlabel = ""];
+m2m_roles_authorities -> roles                 [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "role_id:id", headlabel = ""];
+m2m_users_roles       -> roles                 [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "role_id:id", headlabel = ""];
+m2m_users_roles       -> users                 [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "user_id:id", headlabel = ""];
+orders                -> drugs                 [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "drug_id:id", headlabel = ""];
+orders                -> receipts              [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "receipt_id:id", headlabel = ""];
+receipts              -> users                 [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "solder_id:id", headlabel = ""];
+storages              -> pharmacies            [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "pharmacy_id:id", headlabel = ""];
+
+}

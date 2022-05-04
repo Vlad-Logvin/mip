@@ -23,4 +23,7 @@ public class Order {
 
     @Column(name = "quantity")
     private Integer quantity;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 }

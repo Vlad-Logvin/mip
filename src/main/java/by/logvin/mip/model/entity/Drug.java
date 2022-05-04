@@ -16,14 +16,14 @@ public class Drug {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 1024)
     private String description;
 
     @Column(name = "image")
     private String image;
 
-    @Column(name = "price")
-    private String price;
+    @Column(name = "price", columnDefinition = "numeric(18,2)")
+    private Double price;
 
     @Column(name = "quantity")
     private Integer quantity;
@@ -34,4 +34,8 @@ public class Drug {
     @ManyToOne
     @JoinColumn(name = "storage_id", nullable = false)
     private Storage storage;
+
+    @ManyToOne
+    @JoinColumn(name = "vendor_id", nullable = false)
+    private Vendor vendor;
 }

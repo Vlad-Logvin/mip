@@ -12,6 +12,9 @@ public class Report {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "start_date")
     private LocalDate startDate;
 
@@ -20,9 +23,12 @@ public class Report {
 
     @ManyToMany
     @JoinTable(
-            name = "m2m_reports_orders",
+            name = "m2m_reports_receipts",
             joinColumns = {@JoinColumn(name = "report_id")},
             inverseJoinColumns = {@JoinColumn(name = "receipt_id")}
     )
     private Set<Receipt> receipts;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 }

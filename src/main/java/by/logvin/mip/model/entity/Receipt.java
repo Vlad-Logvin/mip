@@ -19,9 +19,12 @@ public class Receipt {
     @Column(name = "date_of_purchase")
     private LocalDate dateOfPurchase;
 
-    @Column(name = "grand_total")
+    @Column(name = "grand_total", columnDefinition = "numeric(18,2)")
     private Double grandTotal;
 
     @OneToMany(mappedBy = "receipt")
     private Set<Order> orders;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 }

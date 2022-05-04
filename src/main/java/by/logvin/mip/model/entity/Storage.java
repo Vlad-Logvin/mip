@@ -11,8 +11,8 @@ public class Storage {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "address")
-    private String address;
+    @Column(name = "pharmacy_address", length = 512)
+    private String pharmacyAddress;
 
     @OneToMany(mappedBy = "storage")
     private List<Drug> drugs;
@@ -20,4 +20,7 @@ public class Storage {
     @ManyToOne
     @JoinColumn(name = "pharmacy_id", nullable = false)
     private Pharmacy pharmacy;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 }

@@ -14,9 +14,9 @@ public class Pharmacy {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "address")
-    private String address;
-
     @OneToMany(mappedBy = "pharmacy")
     private Set<Storage> storages;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 }
