@@ -14,7 +14,7 @@ public class Receipt {
 
     @ManyToOne
     @JoinColumn(name = "solder_id", nullable = false)
-    private Employee solder;
+    private User solder;
 
     @Column(name = "date_of_purchase")
     private LocalDate dateOfPurchase;

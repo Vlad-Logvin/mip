@@ -19,6 +19,9 @@ public class Drug {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "image")
+    private String image;
+
     @Column(name = "price")
     private String price;
 

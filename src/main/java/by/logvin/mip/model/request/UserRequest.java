@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Data
-public class EmployeeRequest {
+public class UserRequest {
     private Long id;
 
     @Email(message = "Not valid email")

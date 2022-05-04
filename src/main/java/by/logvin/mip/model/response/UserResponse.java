@@ -3,7 +3,7 @@ package by.logvin.mip.model.response;
 import lombok.Data;
 
 @Data
-public class EmployeeResponse {
+public class UserResponse {
     private Long id;
     private String email;
     private String name;

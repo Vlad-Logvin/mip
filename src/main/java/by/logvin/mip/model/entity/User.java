@@ -6,9 +6,9 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "employees")
+@Table(name = "users")
 @Data
-public class Employee {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -34,8 +34,8 @@ public class Employee {
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
-            name = "m2m_employees_roles",
-            joinColumns = {@JoinColumn(name = "employee_id")},
+            name = "m2m_users_roles",
+            joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
     private Set<Role> roles;
