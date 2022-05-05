@@ -1,11 +1,18 @@
 package by.logvin.mip.model.entity;
 
+import lombok.Data;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
 @Table(name = "receipts")
+@Data
+@SQLDelete(sql = "UPDATE receipts SET is_deleted = true WHERE id=?")
+@Where(clause = "is_deleted=false")
 public class Receipt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

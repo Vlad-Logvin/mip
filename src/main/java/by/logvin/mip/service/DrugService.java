@@ -13,9 +13,11 @@ public interface DrugService {
 
     Page<Drug> findByName(String name, Pageable pageable);
 
+    Page<Drug> findByStorage(Long storageId, Pageable pageable);
+
     Drug save(Drug drug);
 
-    Drug delete(Long id);
+    void delete(Long id);
 
     Drug update(Long id, Drug drug);
 }

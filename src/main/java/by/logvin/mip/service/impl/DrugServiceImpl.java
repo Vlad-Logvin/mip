@@ -3,6 +3,7 @@ package by.logvin.mip.service.impl;
 import by.logvin.mip.model.entity.Drug;
 import by.logvin.mip.persistence.DrugRepository;
 import by.logvin.mip.service.DrugService;
+import by.logvin.mip.service.StorageService;
 import by.logvin.mip.service.exception.AutomatedDrugServiceException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ import javax.transaction.Transactional;
 public class DrugServiceImpl implements DrugService {
 
     private DrugRepository drugRepository;
+    private StorageService storageService;
 
     @Override
     public Drug findById(Long id) {
@@ -35,20 +37,18 @@ public class DrugServiceImpl implements DrugService {
     }
 
     @Override
-    public Drug save(Drug drug) {
-        try {
-            return drugRepository.save(drug);
-        } catch (Exception e) {
-            throw new AutomatedDrugServiceException("Drug was not saved", 400);
-        }
+    public Page<Drug> findByStorage(Long storageId, Pageable pageable) {
+        return drugRepository.findAllByStorage(storageService.findById(storageId), pageable);
     }
 
     @Override
-    public Drug delete(Long id) {
-        Drug drugToDelete = findById(id);
-        drugToDelete.setDeleted(true);
-        drugToDelete = drugRepository.save(drugToDelete);
-        return drugToDelete;
+    public Drug save(Drug drug) {
+        return drugRepository.save(drug);
+    }
+
+    @Override
+    public void delete(Long id) {
+        drugRepository.deleteById(id);
     }
 
     @Override
@@ -58,6 +58,8 @@ public class DrugServiceImpl implements DrugService {
         drugToUpdate.setPrice(drug.getPrice());
         drugToUpdate.setQuantity(drug.getQuantity());
         drugToUpdate.setDescription(drug.getDescription());
+        drugToUpdate.setImage(drug.getImage());
+        drugRepository.save(drugToUpdate);
         return drugToUpdate;
     }
 }
