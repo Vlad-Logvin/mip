@@ -21,7 +21,7 @@ public class User {
     @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "encrypted_password", length = 64)
+    @Column(name = "encrypted_password", length = 72)
     private String password;
 
     @Column(name = "name", length = 64)

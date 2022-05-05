@@ -7,7 +7,9 @@ public interface UserService {
 
     User findByEmail(String email);
 
-    User save(User user);
+    User savePharmacyOwner(User user);
+
+    User savePharmacist(User user);
 
     void delete(Long id);
 }

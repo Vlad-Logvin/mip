@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,7 @@ public class DrugController {
     private ModelMapper modelMapper;
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('PHARMACY_OWNER')")
     public Drug findById(@PathVariable Long id) {
         return drugService.findById(id);
     }
