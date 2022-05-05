@@ -9,8 +9,6 @@ import javax.validation.constraints.Pattern;
 
 @Data
 public class UserRequest {
-    private Long id;
-
     @Email(message = "Not valid email")
     @NotNull(message = "Email can't be null")
     private String email;

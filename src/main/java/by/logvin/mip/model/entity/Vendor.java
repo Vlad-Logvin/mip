@@ -20,9 +20,9 @@ public class Vendor {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "address")
+    @Column(name = "address", length = 512)
     private String address;
 
-    @Column(name = "is_deleted")
+    @Column(name = "is_deleted", columnDefinition = "boolean default false")
     private boolean isDeleted;
 }

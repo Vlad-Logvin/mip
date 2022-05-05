@@ -32,6 +32,6 @@ public class Receipt {
     @OneToMany(mappedBy = "receipt")
     private Set<Order> orders;
 
-    @Column(name = "is_deleted")
+    @Column(name = "is_deleted", columnDefinition = "boolean default false")
     private boolean isDeleted;
 }

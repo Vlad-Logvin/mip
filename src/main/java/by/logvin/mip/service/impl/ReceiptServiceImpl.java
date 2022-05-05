@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -25,7 +25,7 @@ public class ReceiptServiceImpl implements ReceiptService {
     }
 
     @Override
-    public List<Receipt> findAllWithinPeriod(LocalDate startDate, LocalDate endDate) {
+    public Set<Receipt> findAllWithinPeriod(LocalDate startDate, LocalDate endDate) {
         return receiptRepository.findAllByDateOfPurchaseBetween(startDate, endDate);
     }
 

@@ -1,5 +1,6 @@
 package by.logvin.mip.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -24,7 +25,7 @@ public class Drug {
     private String description;
 
     @Column(name = "image")
-    private String image;
+    private byte[] image;
 
     @Column(name = "price", columnDefinition = "numeric(18,2)")
     private Double price;
@@ -32,10 +33,11 @@ public class Drug {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "is_deleted")
+    @Column(name = "is_deleted", columnDefinition = "boolean default false")
     private boolean isDeleted;
 
     @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "storage_id", nullable = false)
     private Storage storage;
 
