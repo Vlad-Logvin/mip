@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/drugs")
 @AllArgsConstructor
 @Validated
+@CrossOrigin
 public class DrugController {
 
     private DrugService drugService;
@@ -53,7 +54,6 @@ public class DrugController {
         Drug drug = requestToEntity(drugRequest);
         drug.setStorage(storageService.findById(drugRequest.getStorageId()));
         drug.setVendor(vendorService.findById(drugRequest.getVendorId()));
-        drug.setImage(drugRequest.getImage().getBytes());
         return drugService.save(drug);
     }
 

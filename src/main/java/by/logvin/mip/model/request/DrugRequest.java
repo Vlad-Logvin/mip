@@ -17,8 +17,6 @@ public class DrugRequest {
     @Length(max = 1024, message = "Description must consist of 1024 or less symbols")
     private String description;
 
-    private MultipartFile image;
-
     @NotNull(message = "Price can't be null")
     private Double price;
 

@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/storages")
 @AllArgsConstructor
+@CrossOrigin
 public class StorageController {
 
     private StorageService storageService;

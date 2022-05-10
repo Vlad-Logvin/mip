@@ -34,6 +34,11 @@ public class StorageServiceImpl implements StorageService {
     }
 
     @Override
+    public Page<Storage> findAllStoragesByPharmacy(Long pharmacyId, Pageable pageable) {
+        return storageRepository.findAllByPharmacyId(pharmacyId, pageable);
+    }
+
+    @Override
     public void delete(Long id) {
         if (!findById(id).getDrugs().isEmpty()) {
             throw new AutomatedDrugServiceException("Storage isn't empty", 400);

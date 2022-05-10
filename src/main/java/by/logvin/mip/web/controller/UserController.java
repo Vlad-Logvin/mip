@@ -2,6 +2,7 @@ package by.logvin.mip.web.controller;
 
 import by.logvin.mip.model.entity.User;
 import by.logvin.mip.model.request.UserRequest;
+import by.logvin.mip.model.response.UserResponse;
 import by.logvin.mip.model.security.JwtModel;
 import by.logvin.mip.model.security.UserAuthRequest;
 import by.logvin.mip.security.service.SecurityService;
@@ -23,14 +24,15 @@ import java.util.stream.Collectors;
 @RequestMapping("/users")
 @AllArgsConstructor
 @Validated
+@CrossOrigin
 public class UserController {
     private UserService userService;
     private SecurityService securityService;
     private ModelMapper modelMapper;
 
     @PostMapping("/login")
-    public JwtModel authenticate(HttpServletRequest request, HttpServletResponse response,
-                                 @RequestBody @Valid UserAuthRequest userAuthRequest) {
+    public JwtModel login(HttpServletRequest request, HttpServletResponse response,
+                          @RequestBody @Valid UserAuthRequest userAuthRequest) {
         return securityService.autologin(request, response, userAuthRequest.getEmail(), userAuthRequest.getPassword());
     }
 
@@ -44,12 +46,12 @@ public class UserController {
 
 
     @GetMapping("/{id}")
-    public User findById(@PathVariable Long id) {
-        return userService.findById(id);
+    public UserResponse findById(@PathVariable Long id) {
+        return modelMapper.map(userService.findById(id), UserResponse.class);
     }
 
     @GetMapping("/search")
-    public User findById(@RequestParam(name = "email") String email) {
+    public User findByEmail(@RequestParam(name = "email") String email) {
         return userService.findByEmail(email);
     }
 

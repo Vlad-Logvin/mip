@@ -58,7 +58,6 @@ public class DrugServiceImpl implements DrugService {
         drugToUpdate.setPrice(drug.getPrice());
         drugToUpdate.setQuantity(drug.getQuantity());
         drugToUpdate.setDescription(drug.getDescription());
-        drugToUpdate.setImage(drug.getImage());
         drugRepository.save(drugToUpdate);
         return drugToUpdate;
     }

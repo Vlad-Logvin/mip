@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/receipts")
 @AllArgsConstructor
+@CrossOrigin
 public class ReceiptController {
 
     private ReceiptService receiptService;

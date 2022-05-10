@@ -1,5 +1,6 @@
 package by.logvin.mip.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -32,6 +33,10 @@ public class User {
 
     @Column(name = "address", length = 512)
     private String address;
+
+    @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
+    private Pharmacy pharmacy;
 
     @Column(name = "is_deleted", columnDefinition = "boolean default false")
     private boolean isDeleted;

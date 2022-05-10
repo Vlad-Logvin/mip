@@ -1,5 +1,7 @@
 package by.logvin.mip.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -12,6 +14,7 @@ import java.util.Set;
 @Data
 @SQLDelete(sql = "UPDATE pharmacies SET is_deleted = true WHERE id=?")
 @Where(clause = "is_deleted=false")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Pharmacy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +26,9 @@ public class Pharmacy {
 
     @OneToMany(mappedBy = "pharmacy")
     private Set<Storage> storages;
+
+    @OneToMany(mappedBy = "pharmacy")
+    private Set<User> users;
 
     @Column(name = "is_deleted", columnDefinition = "boolean default false")
     private boolean isDeleted;

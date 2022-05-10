@@ -33,10 +33,9 @@ public class SecurityService {
     private final SecretKey secretKey;
 
     @Autowired
-    public SecurityService(UserRepository userRepository,
-                           UserDetailsService userDetailsService,
-                           AuthenticationManager authenticationManager,
-                           PasswordEncoder passwordEncoder, JwtConfiguration jwtConfiguration, SecretKey secretKey) {
+    public SecurityService(UserRepository userRepository, UserDetailsService userDetailsService,
+                           AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder,
+                           JwtConfiguration jwtConfiguration, SecretKey secretKey) {
         this.userRepository = userRepository;
         this.userDetailsService = userDetailsService;
         this.authenticationManager = authenticationManager;
@@ -50,22 +49,24 @@ public class SecurityService {
         return user.isPresent() && user.get().getId().equals(id);
     }
 
-    public JwtModel autologin(HttpServletRequest request, HttpServletResponse response,
-                              String username, String password) {
+    public JwtModel autologin(HttpServletRequest request, HttpServletResponse response, String username,
+                              String password) {
         UserSecurityDetails userDetails = (UserSecurityDetails) userDetailsService.loadUserByUsername(username);
         if (userDetails == null) {
             return new JwtModel(false);
         }
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
-                = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+                userDetails, password, userDetails.getAuthorities());
         usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetails(request));
         Authentication auth = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         if (auth.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(auth);
-            String token = jwtConfiguration.getTokenPrefix() + new JwtUsernameAndPasswordAuthenticationFilter(
-                    authenticationManager, jwtConfiguration, secretKey).getToken(auth);
+            String token = jwtConfiguration.getTokenPrefix() +
+                    new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager, jwtConfiguration,
+                            secretKey).getToken(auth);
             response.addHeader(HttpHeaders.AUTHORIZATION, token);
-            return new JwtModel(userDetails.getId(), true, token, userDetails.getUsername());
+            return new JwtModel(userDetails.getId(), true, token, userDetails.getUsername(), userDetails.getRoles(),
+                    userDetails.getPharmacyId());
         }
         return new JwtModel(false);
     }

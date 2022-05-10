@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/vendors")
 @AllArgsConstructor
+@CrossOrigin
 public class VendorController {
 
     private VendorService vendorService;

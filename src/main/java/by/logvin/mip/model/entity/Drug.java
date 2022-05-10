@@ -24,9 +24,6 @@ public class Drug {
     @Column(name = "description", length = 1024)
     private String description;
 
-    @Column(name = "image")
-    private byte[] image;
-
     @Column(name = "price", columnDefinition = "numeric(18,2)")
     private Double price;
 

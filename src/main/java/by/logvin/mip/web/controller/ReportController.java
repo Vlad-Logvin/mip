@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/reports")
 @AllArgsConstructor
+@CrossOrigin
 public class ReportController {
 
     private ReportService reportService;

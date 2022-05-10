@@ -22,6 +22,7 @@ public class UserSecurityDetails implements UserDetails {
     private String email;
     private Boolean enabled;
     private Long id;
+    private Long pharmacyId;
 
     public UserSecurityDetails(User user) {
         this.email = user.getEmail();
@@ -31,6 +32,11 @@ public class UserSecurityDetails implements UserDetails {
         this.roles = user.getRoles();
         this.enabled = true;
         this.id = user.getId();
+        this.pharmacyId = user.getPharmacy().getId();
+    }
+
+    public Long getPharmacyId() {
+        return pharmacyId;
     }
 
     public Long getId() {
@@ -46,6 +52,10 @@ public class UserSecurityDetails implements UserDetails {
             authorities.add(new SimpleGrantedAuthority(role.getRole()));
         }
         return authorities;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
     }
 
     @Override

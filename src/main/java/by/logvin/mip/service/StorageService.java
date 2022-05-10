@@ -11,5 +11,7 @@ public interface StorageService {
 
     Page<Storage> findAll(Pageable pageable);
 
+    Page<Storage> findAllStoragesByPharmacy(Long pharmacyId, Pageable pageable);
+
     void delete(Long id);
 }
