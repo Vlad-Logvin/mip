@@ -43,11 +43,6 @@ public class DrugController {
         return drugService.findPaginated(pageable);
     }
 
-    @GetMapping("/search")
-    public Page<Drug> findByName(@RequestParam(name = "name") String name, Pageable pageable) {
-        return drugService.findByName(name, pageable);
-    }
-
     @PostMapping
     public Drug save(@RequestBody @Valid DrugRequest drugRequest, BindingResult bindingResult) throws IOException {
         validate(bindingResult);

@@ -1,6 +1,7 @@
 package by.logvin.mip.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
@@ -29,6 +30,7 @@ public class Storage {
 
     @ManyToOne
     @JoinColumn(name = "pharmacy_id", nullable = false)
+    @JsonIdentityReference(alwaysAsId = true)
     private Pharmacy pharmacy;
 
     @Column(name = "is_deleted", columnDefinition = "boolean default false")

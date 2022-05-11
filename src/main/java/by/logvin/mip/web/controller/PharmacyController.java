@@ -1,9 +1,11 @@
 package by.logvin.mip.web.controller;
 
+import by.logvin.mip.model.entity.Drug;
 import by.logvin.mip.model.entity.Pharmacy;
 import by.logvin.mip.model.entity.Storage;
 import by.logvin.mip.model.entity.User;
 import by.logvin.mip.model.request.PharmacyRequest;
+import by.logvin.mip.service.DrugService;
 import by.logvin.mip.service.PharmacyService;
 import by.logvin.mip.service.StorageService;
 import by.logvin.mip.service.UserService;
@@ -28,6 +30,7 @@ public class PharmacyController {
     private PharmacyService pharmacyService;
     private UserService userService;
     private StorageService storageService;
+    private DrugService drugService;
     private ModelMapper modelMapper;
 
     @GetMapping("/{id}")
@@ -35,14 +38,26 @@ public class PharmacyController {
         return pharmacyService.findById(id);
     }
 
-    @GetMapping("/{id}/users")
+    @GetMapping("/{id}/pharmacists")
     public Page<User> findByPharmacy(@PathVariable Long id, Pageable pageable) {
         return userService.findAllByPharmacy(id, pageable);
     }
 
     @GetMapping("/{id}/storages")
     public Page<Storage> findStoragesByPharmacy(@PathVariable Long id, Pageable pageable) {
-        return storageService.findAllStoragesByPharmacy(id, pageable);
+        Page<Storage> allStoragesByPharmacy = storageService.findAllStoragesByPharmacy(id, pageable);
+        return allStoragesByPharmacy;
+    }
+
+    @GetMapping("/{id}/drugs")
+    public Page<Drug> findDrugsByPharmacy(@PathVariable Long id,
+                                          @RequestParam(value = "name", required = false) String name,
+                                          Pageable pageable) {
+        if (name != null) {
+            return drugService.findByName(id, name, pageable);
+        } else {
+            return drugService.findAllDrugsByPharmacy(id, pageable);
+        }
     }
 
     @PostMapping

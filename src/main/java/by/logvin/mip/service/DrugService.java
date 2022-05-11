@@ -11,7 +11,7 @@ public interface DrugService {
 
     Page<Drug> findPaginated(Pageable pageable);
 
-    Page<Drug> findByName(String name, Pageable pageable);
+    Page<Drug> findByName(Long pharmacyId, String name, Pageable pageable);
 
     Page<Drug> findByStorage(Long storageId, Pageable pageable);
 
@@ -20,4 +20,6 @@ public interface DrugService {
     void delete(Long id);
 
     Drug update(Long id, Drug drug);
+
+    Page<Drug> findAllDrugsByPharmacy(Long id, Pageable pageable);
 }

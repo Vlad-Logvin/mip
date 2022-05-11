@@ -44,6 +44,13 @@ public class UserController {
         return securityService.autologin(request, response, user.getEmail(), user.getPassword());
     }
 
+    @PostMapping("/pharmacist")
+    public JwtModel registerPharmacist(HttpServletRequest request, HttpServletResponse response,
+                             @RequestBody @Valid UserRequest userRequest, BindingResult bindingResult) {
+        validate(bindingResult);
+        User user = userService.savePharmacist(modelMapper.map(userRequest, User.class));
+        return securityService.autologin(request, response, user.getEmail(), user.getPassword());
+    }
 
     @GetMapping("/{id}")
     public UserResponse findById(@PathVariable Long id) {

@@ -1,6 +1,7 @@
 package by.logvin.mip.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
@@ -25,9 +26,11 @@ public class Pharmacy {
     private String name;
 
     @OneToMany(mappedBy = "pharmacy")
+    @JsonIdentityReference(alwaysAsId = true)
     private Set<Storage> storages;
 
     @OneToMany(mappedBy = "pharmacy")
+    @JsonIdentityReference(alwaysAsId = true)
     private Set<User> users;
 
     @Column(name = "is_deleted", columnDefinition = "boolean default false")

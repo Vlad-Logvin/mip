@@ -39,7 +39,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<User> findAllByPharmacy(Long pharmacyId, Pageable pageable) {
-        return userRepository.findAllByPharmacy(pharmacyService.findById(pharmacyId), pageable);
+        return userRepository.findAllByPharmacyAndRolesIn(pharmacyService.findById(pharmacyId),
+                Set.of(roleService.findPharmacist()), pageable);
     }
 
     @Override

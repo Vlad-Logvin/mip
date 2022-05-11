@@ -67,7 +67,7 @@ export const registerUser = (email, password, username) => {
 
 const setLocalStorage = (responseData) => {
   localStorage.setItem("jwtToken", responseData.token);
-  localStorage.setItem("pharmacyId", responseData.pharmacy)
+  localStorage.setItem("pharmacyId", responseData.pharmacyId)
   localStorage.setItem("isLoggedIn", responseData.loggedIn);
   localStorage.setItem("username", responseData.username);
   localStorage.setItem("role", responseData.roles[0].role);

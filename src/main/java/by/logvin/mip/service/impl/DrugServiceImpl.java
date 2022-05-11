@@ -32,8 +32,8 @@ public class DrugServiceImpl implements DrugService {
     }
 
     @Override
-    public Page<Drug> findByName(String name, Pageable pageable) {
-        return drugRepository.findAllByNameLike(name, pageable);
+    public Page<Drug> findByName(Long pharmacyId, String name, Pageable pageable) {
+        return drugRepository.findAllByNameContainingIgnoreCaseAndStorage_Pharmacy_Id(name, pharmacyId, pageable);
     }
 
     @Override
@@ -60,5 +60,10 @@ public class DrugServiceImpl implements DrugService {
         drugToUpdate.setDescription(drug.getDescription());
         drugRepository.save(drugToUpdate);
         return drugToUpdate;
+    }
+
+    @Override
+    public Page<Drug> findAllDrugsByPharmacy(Long id, Pageable pageable) {
+        return drugRepository.findAllByStorage_PharmacyId(id, pageable);
     }
 }

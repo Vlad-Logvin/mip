@@ -12,10 +12,14 @@ export const findStorageById = (storageId) => {
         await dispatch({type: FIND_STORAGE_BY_ID});
         try {
             const res = await StorageService.findById(storageId);
-            await dispatch(fetchStoragePromise(res.data));
+            await dispatch({
+                type: STORAGE_PROMISE, payload: res.data,
+            });
             return Promise.resolve(res.data);
         } catch (err) {
-            await dispatch(fetchStoragePromise(err));
+            await dispatch({
+                type: STORAGE_PROMISE, payload: err,
+            });
             return Promise.reject(err);
         }
     };
@@ -26,10 +30,14 @@ export const findAllStorages = (pharmacyId, page = 1, size = 10) => {
         await dispatch({type: FIND_ALL_STORAGES});
         try {
             const res = await StorageService.findAll(pharmacyId, page, size);
-            await dispatch(fetchStoragePromise(res.data));
+            await dispatch({
+                type: STORAGE_PROMISE, payload: res.data,
+            });
             return Promise.resolve(res.data);
         } catch (err) {
-            await dispatch(fetchStoragePromise(err));
+            await dispatch({
+                type: STORAGE_PROMISE, payload: err,
+            });
             return Promise.reject(err);
         }
     };
@@ -40,10 +48,14 @@ export const saveStorage = (storage) => {
         await dispatch({type: SAVE_STORAGE});
         try {
             const res = await StorageService.save(storage);
-            await dispatch(fetchStoragePromise(res.data));
+            await dispatch({
+                type: STORAGE_PROMISE, payload: res.data,
+            });
             return Promise.resolve(res.data);
         } catch (err) {
-            await dispatch(fetchStoragePromise(err));
+            await dispatch({
+                type: STORAGE_PROMISE, payload: err,
+            });
             return Promise.reject(err);
         }
     };
@@ -54,18 +66,20 @@ export const deleteStorageById = (storageId) => {
         await dispatch({type: DELETE_STORAGE_BY_ID});
         try {
             const res = await StorageService.deleteById(storageId);
-            await dispatch(fetchStoragePromise(res.data));
+            await dispatch({
+                type: STORAGE_PROMISE, payload: res.data,
+            });
             return Promise.resolve(res.data);
         } catch (err) {
-            await dispatch(fetchStoragePromise(err));
+            await dispatch({
+                type: STORAGE_PROMISE, payload: err,
+            });
             return Promise.reject(err);
         }
     };
 }
 
 
-const fetchStoragePromise = (responseData) => {
-    return {
-        type: STORAGE_PROMISE, payload: responseData,
-    };
-};
+
+
+

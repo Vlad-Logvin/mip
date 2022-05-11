@@ -29,6 +29,11 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role findPharmacist() {
-        return roleRepository.findByRole("ROLE_PHARMACIST").orElse(roleRepository.save(new Role("ROLE_PHARMACIST")));
+        Optional<Role> role = roleRepository.findByRole("ROLE_PHARMACIST");
+        if (role.isEmpty()) {
+            return roleRepository.save(new Role("ROLE_PHARMACIST"));
+        } else {
+            return role.get();
+        }
     }
 }
